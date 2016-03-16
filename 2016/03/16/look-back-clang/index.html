@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>C语言回忆录1——指针与地址 | tyzero</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="给初学者C语言回忆录系列是写给初学者的。大神请拐弯。
+大一学的。四年过去了，几乎没拜访过这个老朋友，因为工作主要还是java和JavaScript为主。不得不说，有了C基础，完后学习各种语言都觉得特别简单。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言回忆录1——指针与地址">
+<meta property="og:url" content="http://yoursite.com/2016/03/16/look-back-clang/index.html">
+<meta property="og:site_name" content="tyzero">
+<meta property="og:description" content="给初学者C语言回忆录系列是写给初学者的。大神请拐弯。
+大一学的。四年过去了，几乎没拜访过这个老朋友，因为工作主要还是java和JavaScript为主。不得不说，有了C基础，完后学习各种语言都觉得特别简单。">
+<meta property="og:updated_time" content="2016-03-16T16:27:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C语言回忆录1——指针与地址">
+<meta name="twitter:description" content="给初学者C语言回忆录系列是写给初学者的。大神请拐弯。
+大一学的。四年过去了，几乎没拜访过这个老朋友，因为工作主要还是java和JavaScript为主。不得不说，有了C基础，完后学习各种语言都觉得特别简单。">
+  
+    <link rel="alternative" href="/atom.xml" title="tyzero" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://tp3.sinaimg.cn/2277317894/180/5753080990" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Tyzero</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">天网开发者之一</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>標籤</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>關於</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/tyzero" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/ilove000" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/tyzero" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/AS/" style="font-size: 10px;">AS</a> <a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/唠叨/" style="font-size: 10px;">唠叨</a> <a href="/tags/回顾/" style="font-size: 10px;">回顾</a> <a href="/tags/拖延症/" style="font-size: 10px;">拖延症</a> <a href="/tags/笔记/" style="font-size: 10px;">笔记</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://shyling.com/">Shy泠的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Tyzero</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://tp3.sinaimg.cn/2277317894/180/5753080990" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Tyzero</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">天网开发者之一</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/tyzero" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/ilove000" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/tyzero" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-look-back-clang" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/16/look-back-clang/" class="article-date">
+  	<time datetime="2016-03-16T12:54:38.000Z" itemprop="datePublished">2016-03-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      C语言回忆录1——指针与地址
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言/">C语言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/回顾/">回顾</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/clang/">clang</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="u7ED9_u521D_u5B66_u8005"><a href="#u7ED9_u521D_u5B66_u8005" class="headerlink" title="给初学者"></a>给初学者</h1><p>C语言回忆录系列是写给初学者的。大神请拐弯。</p>
+<p>大一学的。四年过去了，几乎没拜访过这个老朋友，因为工作主要还是java和JavaScript为主。不得不说，有了C基础，完后学习各种语言都觉得特别简单。<br><a id="more"></a></p>
+<h2 id="u5185_u5B58_u5730_u5740"><a href="#u5185_u5B58_u5730_u5740" class="headerlink" title="内存地址"></a>内存地址</h2><p>C语言和java，PHP，JavaScript这些语言不同，写C会感觉到和“硬件打交道”，用网络上的话叫做“接近底层”。</p>
+<p><strong>内存</strong>，是就是C语言最常操作的硬件。可以把内存想象成一个存数据的大仓库，内存的最小单位的 <strong>位</strong>，只能存0和1.你可以把他想象成一个只能存0和1的小盒子。4G的内存有多少个小盒子？请自行搜索。</p>
+<p>每个小盒子都有一个“物理编号“”，有了这个编号，CPU就可以根据这个编号，操作对应的小盒子，让它装1或者装0. 这个小盒子的物理编号，就是 <strong>内存地址</strong>。我们有事也把内存地址叫做“引用”</p>
+<h2 id="u6307_u9488"><a href="#u6307_u9488" class="headerlink" title="指针"></a>指针</h2><p>指针是一个变量，指针的值是内存地址。</p>
+<ol>
+<li>int a是一个变量，a装的是数字，a是int类型。</li>
+<li>int<em> a是一个指针变量， a装的是内存地址，a是int</em> 类型。</li>
+</ol>
+<p>（这就是*号的使用方式之一）</p>
+<p>一个更好的比喻，指针是信封，引用是内存地址，指针指向的值是房子。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;	<span class="keyword">int</span> a=<span class="number">21</span>; <span class="comment">//a是int类型，分配了4个字节，既4*8个位，a保存的值为21，在内存里是通常二进制表示。</span>	<span class="keyword">int</span> b; <span class="comment">//分配4个字节，暂时没有值。默认是0</span>	<span class="comment">//可以通过sizeof函数查看变量占用了几个字节。</span>	<span class="comment">// printf("a sizeof is :%d\n ",sizeof(a));</span>	<span class="keyword">int</span>* p; <span class="comment">//分配空间给p,p是int* 类型。既int指针类型.</span>	p=&amp;a;  <span class="comment">//&amp; 是“取地址符”，把a的“首地址”赋值给p</span>	b=*p; <span class="comment">// * 是 “取指向值符”，取得p执行的值 a, 既 b=21;</span>	<span class="built_in">printf</span>(<span class="string">"b is :%d\n"</span>,b);	*p=<span class="number">3</span>; <span class="comment">//取得p的指向值a, 既a=3;</span>	<span class="built_in">printf</span>(<span class="string">"b is :%d\n "</span>,b);	<span class="built_in">printf</span>(<span class="string">"a is :%d\n "</span>,a);	<span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br></pre></td></tr></table></figure>
+<p>本节题外话，const关键字可以将变量声明为常量，指针常量和常量指针是不同的，感兴趣请自行搜索之😁。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/03/16/my-hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">我的hexo博客</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="look-back-clang" data-title="C语言回忆录1——指针与地址" data-url="http://yoursite.com/2016/03/16/look-back-clang/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"tyzero"};
+	(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+
+    ds.src = '/js/embed.js';
+    /*上面是我自己的 embed.js 链接，请改为你自己的地址*/
+
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Tyzero
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
