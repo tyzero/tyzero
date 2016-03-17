@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="tyzero">
 <meta property="og:description" content="给初学者C语言回忆录系列是写给初学者的。大神请拐弯。
 大一学的。四年过去了，几乎没拜访过这个老朋友，因为工作主要还是java和JavaScript为主。不得不说，有了C基础，完后学习各种语言都觉得特别简单。">
-<meta property="og:updated_time" content="2016-03-16T16:41:30.000Z">
+<meta property="og:updated_time" content="2016-03-17T03:22:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言回忆录1——指针与地址">
 <meta name="twitter:description" content="给初学者C语言回忆录系列是写给初学者的。大神请拐弯。
@@ -238,8 +238,8 @@
         <h1 id="u7ED9_u521D_u5B66_u8005"><a href="#u7ED9_u521D_u5B66_u8005" class="headerlink" title="给初学者"></a>给初学者</h1><p>C语言回忆录系列是写给初学者的。大神请拐弯。</p>
 <p>大一学的。四年过去了，几乎没拜访过这个老朋友，因为工作主要还是java和JavaScript为主。不得不说，有了C基础，完后学习各种语言都觉得特别简单。<br><a id="more"></a></p>
 <h2 id="u5185_u5B58_u5730_u5740"><a href="#u5185_u5B58_u5730_u5740" class="headerlink" title="内存地址"></a>内存地址</h2><p>C语言和java，PHP，JavaScript这些语言不同，写C会感觉到和“硬件打交道”，用网络上的话叫做“接近底层”。</p>
-<p><strong>内存</strong>，是就是C语言最常操作的硬件。可以把内存想象成一个存数据的大仓库，内存的最小单位的 <strong>位</strong>，只能存0和1.你可以把他想象成一个只能存0和1的小盒子。4G的内存有多少个小盒子？请自行搜索。</p>
-<p>每个小盒子都有一个“物理编号“”，有了这个编号，CPU就可以根据这个编号，操作对应的小盒子，让它装1或者装0. 这个小盒子的物理编号，就是 <strong>内存地址</strong>。我们有事也把内存地址叫做“引用”</p>
+<p><strong>内存</strong>，是就是C语言最常操作的硬件。可以把内存想象成一个存数据的大仓库，内存的最小单位是 <strong>位</strong>，只能存0和1.你可以把他想象成一个只能存0和1的小盒子。4G的内存有多少个小盒子？请自行搜索。</p>
+<p>每个小盒子都有一个“物理编号“”，有了这个编号，CPU就可以根据这个编号，操作对应的小盒子，让它装1或者装0. 这个小盒子的物理编号，就是 <strong>内存地址</strong>。我们有时也把内存地址叫做“引用”</p>
 <h2 id="u6307_u9488"><a href="#u6307_u9488" class="headerlink" title="指针"></a>指针</h2><p>指针是一个变量，指针的值是内存地址。</p>
 <ol>
 <li><code>int a</code>是一个变量，a装的是数字，a是<code>int</code>类型。</li>
