@@ -74,12 +74,12 @@
 					<div class="tips-arrow"></div>
 					<ul class="tips-inner">
 						<li>菜单</li>
-						<li>Tags</li>
+						<li>標籤</li>
 						
 						<li>友情链接</li>
 						
 						
-						<li>Über</li>
+						<li>關於</li>
 						
 					</ul>
 				</div>
@@ -220,18 +220,7 @@
       
         <p>数组和指针，对初学者来说有很多说不清的暧昧关系。</p>
 <h1 id="u6570_u7EC4_u4E0E_u6307_u9488"><a href="#u6570_u7EC4_u4E0E_u6307_u9488" class="headerlink" title="数组与指针"></a>数组与指针</h1><h2 id="u6570_u7EC4_u540D_u662F_u4E00_u4E2A_u5B9E_u9645_u7684_u5185_u5B58_u5730_u5740"><a href="#u6570_u7EC4_u540D_u662F_u4E00_u4E2A_u5B9E_u9645_u7684_u5185_u5B58_u5730_u5740" class="headerlink" title="数组名是一个实际的内存地址"></a>数组名是一个实际的内存地址</h2><p><code>int arr[10];</code>分配空间，C语言是在定义的时候分配空间的。这里可以理解分配10个int类型的格子，这一组格子，取名为arr。 <strong>arr的值是一个地址！,他是一个常量</strong>（不可改变）！</p>
-<p>下面看一个例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">10</span>];</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"arr 的地址是 %d\n"</span>, arr); <span class="comment">//打印出来的确实是地址，我们并没有用到取地址符 &amp; </span></span><br><span class="line">	<span class="keyword">int</span>* ptr=arr;					 <span class="comment">// 指针是用来保存地址的。这个数组是 int 类型，所以我们用int* 类型的指针来保存这个地址。 </span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"arr 的地址是 %d\n"</span>, ptr); <span class="comment">//打印出的结果相同，再次验证 arr确实是一个地址。</span></span><br><span class="line"></span><br><span class="line">    ptr[<span class="number">0</span>]=<span class="number">21</span>;  					<span class="comment">//有了地址，就能操作地址指向的值，这里尝试一下。</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, arr[<span class="number">0</span>]);		<span class="comment">//注意，这里打印的是arr[0]</span></span><br><span class="line">	<span class="comment">/* code */</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>ptr是一个int类型的指针，ptr赋值为arr后，prt也能像数组那样使用了：<code>ptr[0]=21</code>.<br>这就说明，ptr和arr是同类型的。不同的是，ptr是指针变量，而arr是指针常量，指针常量，其实就是实实际际的内存地址~</p>
-<h2 id="u6307_u9488_u7684_u201C_u52A0_u51CF_u8FD0_u7B97_u201D"><a href="#u6307_u9488_u7684_u201C_u52A0_u51CF_u8FD0_u7B97_u201D" class="headerlink" title="指针的“加减运算”"></a>指针的“加减运算”</h2><p>指针的加减法主要是针对数组的，所以也反正这一节。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span>  str_a[<span class="number">10</span>]=<span class="string">"world"</span>;</span><br><span class="line">	<span class="keyword">char</span> *ptr;   </span><br><span class="line">	ptr=str_a;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">//方式一</span></span><br><span class="line">	str_a[<span class="number">1</span>]=<span class="string">'c'</span>;  <span class="comment">//“传统方式”修改第一个值 </span></span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%c\n"</span>, str_a[<span class="number">1</span>]);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>, str_a);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//方式2</span></span><br><span class="line">	*(str_a+<span class="number">1</span>)=<span class="string">'f'</span>;   <span class="comment">//指针加法出现，加一代表的是“移动一格” ，这里的+1就移动到了第二格！再用取值符“*”找打值的位置，并把它修改为f</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%c\n"</span>, str_a[<span class="number">1</span>]);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>, str_a);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//方式3</span></span><br><span class="line">	*(ptr+<span class="number">1</span>)=<span class="string">'o'</span>;  <span class="comment">// 上面是指针常量，这里利用指针常量，也可以成功修改.道理同上。</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%c\n"</span>, str_a[<span class="number">1</span>]);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>, str_a);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//首地址覆盖</span></span><br><span class="line">	ptr=ptr+<span class="number">1</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>, ptr); <span class="comment">//这里，字符串从第二位开始输出了</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>&quot;hello&quot;</code> ,双引号的作用:</p>
-<ol>
-<li>隐式地在内存空间里创建了一个数组</li>
-<li>返回了这个数组的地址</li>
-</ol>
-<p>最后，数组名是一个实际的内存地址，是一个指针常量，是没办法被覆盖的。<br>你可以试试。<code>char str[11];str=&quot;sb&quot;;</code> 这是不行的，以为str是一个指针常量。<br>但是<code>char str[11]=&quot;ddd&quot;</code> 这是运行，这是C语言的编译器的语法糖，双引号在这个时候并没有在“常量空间”创建和配合空间，而是直接用了str[11]里面的“栈空间”。<br>什么叫做栈空间？我建议你搜索下，嘻嘻。</p>
-
+<p>下面看一个例子：<br>
       
     </div>
     
@@ -248,6 +237,10 @@
 	</div>
 
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/03/18/lock-back-clang2/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
