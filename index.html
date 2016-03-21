@@ -220,19 +220,7 @@
       
         <p>学了那么久的指针，你有没有思考过为什么要有指针？指针的优点是什么？</p>
 <h1 id="u503C_u4F20_u9012_u4E0E_u5F15_u7528_u4F20_u9012"><a href="#u503C_u4F20_u9012_u4E0E_u5F15_u7528_u4F20_u9012" class="headerlink" title="值传递与引用传递"></a>值传递与引用传递</h1><p>当你定义一个函数如：<code>void fun1(int x);</code>,调用的时候，传递一个值num，<code>fun1(num);</code>这种调用的传值方式叫做<strong>值传递</strong>。</p>
-<p>当你定义一个函数如：<code>void fun2(int* x);</code>,调用的时候，传递一个变量num的地址，<code>fun1(&amp;num);</code>这种调用的传值方式叫做<strong>引用传递</strong>，传的仅仅只是一个num地址。</p>
-<p><strong>简单地来说，传递地址，就是引用传递。</strong></p>
-<h2 id="u533A_u522B_u5728_u4E8E"><a href="#u533A_u522B_u5728_u4E8E" class="headerlink" title="区别在于"></a>区别在于</h2><p>假如内存的最小单位“位”是一个格子：‘口’</p>
-<p>一个字节就是：<code>口口口口 口口口口</code></p>
-<p>值传递，fun1(x);x是一个int类型，假设int类型占用的是4个字节，则函数传递需要传递那么多个格子：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">口口口口 口口口口</span><br><span class="line">口口口口 口口口口</span><br><span class="line">口口口口 口口口口</span><br><span class="line">口口口口 口口口口</span><br></pre></td></tr></table></figure>
-<p>如果传递是结构体的话，就更大了~</p>
-<p>引用传递：fun2(&amp;x),传递只是一个地址，假如地址只占用一个字节，如下:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">口口口口 口口口口</span><br></pre></td></tr></table></figure>
-<p>这里，区别就体现出来了，不管是传递什么，引用传递的都是一段地址，而地址只占一个字节。这样计算机处理起来，就快多了！而且没有重复创建副本！</p>
-<h1 id="u7ED3_u6784_u4F53"><a href="#u7ED3_u6784_u4F53" class="headerlink" title="结构体"></a>结构体</h1><p>我曾经以为，结构体的名字应该也和数组的名字一样，是一个地址。<br>后来才发现，结构体的名字，就是他的值，不是一个地址。这个例子会告诉你。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">struct</span> Manager</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">char</span> name[<span class="number">50</span>];</span><br><span class="line">		<span class="keyword">int</span> age;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">struct</span> Manager coco, zero; <span class="comment">//创建两个Manager，Coco和zero</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//给coco赋值</span></span><br><span class="line">	<span class="built_in">strcpy</span>(coco.name,<span class="string">"coco"</span>);</span><br><span class="line">	coco.age=<span class="number">28</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//把coco拷贝给zero</span></span><br><span class="line"> 	zero=coco;</span><br><span class="line"></span><br><span class="line"> 	<span class="comment">//测试拷贝是否成功</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"zero name is %s\n"</span>,zero.name);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"zero age is %d\n"</span>,zero.age);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//修改zero的名字</span></span><br><span class="line">	<span class="built_in">strcpy</span>(zero.name,<span class="string">"zero"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//再次查看zero和coco</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"zero name is %s\n"</span>,zero.name);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"coco name is %s\n"</span>,coco.name);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>当你定义一个函数如：<code>void fun2(int* x);</code>,调用的时候，传递一个变量num的地址，<code>fun1(&amp;num);</code>这种调用的传值方式叫做<strong>引用传递</strong>，传的仅仅只是一个num地址。<br>
       
     </div>
     
@@ -249,6 +237,10 @@
 	</div>
 
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/03/21/clang-3/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>

@@ -16,7 +16,7 @@
 <meta property="og:description" content="学了那么久的指针，你有没有思考过为什么要有指针？指针的优点是什么？
 值传递与引用传递当你定义一个函数如：void fun1(int x);,调用的时候，传递一个值num，fun1(num);这种调用的传值方式叫做值传递。
 当你定义一个函数如：void fun2(int* x);,调用的时候，传递一个变量num的地址，fun1(&amp;amp;num);这种调用的传值方式叫做引用传递，传的仅仅只是一个nu">
-<meta property="og:updated_time" content="2016-03-21T04:15:02.000Z">
+<meta property="og:updated_time" content="2016-03-21T04:17:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言回忆录3——指针，函数，结构体">
 <meta name="twitter:description" content="学了那么久的指针，你有没有思考过为什么要有指针？指针的优点是什么？
@@ -240,8 +240,7 @@
       
         <p>学了那么久的指针，你有没有思考过为什么要有指针？指针的优点是什么？</p>
 <h1 id="u503C_u4F20_u9012_u4E0E_u5F15_u7528_u4F20_u9012"><a href="#u503C_u4F20_u9012_u4E0E_u5F15_u7528_u4F20_u9012" class="headerlink" title="值传递与引用传递"></a>值传递与引用传递</h1><p>当你定义一个函数如：<code>void fun1(int x);</code>,调用的时候，传递一个值num，<code>fun1(num);</code>这种调用的传值方式叫做<strong>值传递</strong>。</p>
-<p>当你定义一个函数如：<code>void fun2(int* x);</code>,调用的时候，传递一个变量num的地址，<code>fun1(&amp;num);</code>这种调用的传值方式叫做<strong>引用传递</strong>，传的仅仅只是一个num地址。</p>
-<p><strong>简单地来说，传递地址，就是引用传递。</strong></p>
+<p>当你定义一个函数如：<code>void fun2(int* x);</code>,调用的时候，传递一个变量num的地址，<code>fun1(&amp;num);</code>这种调用的传值方式叫做<strong>引用传递</strong>，传的仅仅只是一个num地址。<br><a id="more"></a><br><strong>简单地来说，传递地址，就是引用传递。</strong></p>
 <h2 id="u533A_u522B_u5728_u4E8E"><a href="#u533A_u522B_u5728_u4E8E" class="headerlink" title="区别在于"></a>区别在于</h2><p>假如内存的最小单位“位”是一个格子：‘口’</p>
 <p>一个字节就是：<code>口口口口 口口口口</code></p>
 <p>值传递，fun1(x);x是一个int类型，假设int类型占用的是4个字节，则函数传递需要传递那么多个格子：</p>
